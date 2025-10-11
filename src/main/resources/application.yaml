@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/document_db
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+        ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+server:
+  port:8082
+
+logging:
+    level:
+      root: INFO
+      com.documents.document_service: DEBUG
+    file:
+      name: logs/document-service.log
