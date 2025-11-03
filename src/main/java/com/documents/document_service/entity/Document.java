@@ -14,6 +14,22 @@ public class Document {
 
    private String title;
 
+    // Original file name (e.g. "invoice.pdf")
+    @Column(nullable = false)
+    private String name;
+
+    // File MIME type (e.g. "application/pdf", "image/png")
+    @Column(nullable = false)
+    private String type;
+
+    // Absolute or relative path where file is stored
+    @Column(nullable = false)
+    private String path;
+
+    // File size in bytes
+    @Column(nullable = false)
+    private Long size;
+
    @Column(columnDefinition = "TEXT" )
     private String content;
 
@@ -21,6 +37,10 @@ public class Document {
    private LocalDateTime createdAt;
    private LocalDateTime updatedAt;
    private boolean isActive = false;
+
+    // File-related fields
+    private String fileName;
+    private String mimeType;
 
    //Getter and Setters
     public UUID getId() {return id;}
@@ -43,4 +63,16 @@ public class Document {
 
     public boolean isActive() { return isActive; }
     public void setActive(boolean isActive) { this.isActive = isActive; }
+
+    public String getFileName() { return fileName; }
+    public void setFileName(String fileName) { this.fileName = fileName; }
+
+    public String getMimeType() { return mimeType; }
+    public void setMimeType(String mimeType) { this.mimeType = mimeType; }
+
+    public long getSize() { return  size; }
+    public void setSize(long size) { this.size = size; }
+
+    public String getPath() { return  path; }
+    public void setPath(String path) { this.path = path; }
 }

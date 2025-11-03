@@ -3,11 +3,15 @@ package com.documents.document_service.controller;
 
 import com.documents.document_service.entity.Document;
 import com.documents.document_service.service.DocumentService;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/documents")
@@ -45,5 +49,23 @@ public class DocumentController {
     public ResponseEntity<Void> deleteDocument(@PathVariable Long id) {
         documentService.deleteDocument(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Upload file
+    @PostMapping("/upload")
+    public ResponseEntity<Document> uploadFile(@RequestParam("file") MultipartFile file,
+                                               @RequestParam("uploadedBy") UUID uploadedBy) {
+        Document document = documentService.storeFile(file, uploadedBy);
+        return new ResponseEntity<>(document, HttpStatus.CREATED);
+    }
+
+    // Download file by name
+    @GetMapping("/download/{name}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String name) {
+        Resource resource = documentService.loadFileAsResource(name);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 }
