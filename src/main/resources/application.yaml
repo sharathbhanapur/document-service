@@ -24,3 +24,9 @@ logging:
       com.documents.document_service: DEBUG
     file:
       name: logs/document-service.log
+
+document:
+  storage:
+    location: data/documents
+  validation:
+    allowed-types: pdf,doc

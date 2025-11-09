@@ -1,6 +1,9 @@
 package com.documents.document_service.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 @Entity
@@ -11,11 +14,16 @@ public class DocumentVersion {
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "document_id", nullable = false)
-    private Document document;
 
+    @Column(nullable = false)
+    private UUID documentId;
+
+    @Column(nullable = false)
     private int versionNumber;
+
+    @Setter
+    @Getter
+    private String title;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -23,12 +31,17 @@ public class DocumentVersion {
     private UUID updatedBy;
     private LocalDateTime updatedAt;
 
+    public DocumentVersion() {
+
+    }
+
+
     // Getters and Setters
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
 
-    public Document getDocument() { return document; }
-    public void setDocument(Document document) { this.document = document; }
+    public UUID getDocumentId() { return documentId; }
+    public void setDocumentId(UUID documentId) { this.documentId = documentId; }
 
     public int getVersionNumber() { return versionNumber; }
     public void setVersionNumber(int versionNumber) { this.versionNumber = versionNumber; }
