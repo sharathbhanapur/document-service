@@ -3,22 +3,30 @@ package com.documents.document_service.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 @Entity
 @Table(name = "document_versions")
+@Slf4j
 public class DocumentVersion {
 
     @Id
     @GeneratedValue
+    @Setter
+    @Getter
     private UUID id;
 
 
     @Column(nullable = false)
+    @Setter
+    @Getter
     private UUID documentId;
 
     @Column(nullable = false)
+    @Setter
+    @Getter
     private int versionNumber;
 
     @Setter
@@ -26,32 +34,16 @@ public class DocumentVersion {
     private String title;
 
     @Column(columnDefinition = "TEXT")
+    @Setter
+    @Getter
     private String content;
 
+    @Setter
+    @Getter
     private UUID updatedBy;
+
+    @Setter
+    @Getter
     private LocalDateTime updatedAt;
 
-    public DocumentVersion() {
-
-    }
-
-
-    // Getters and Setters
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
-
-    public UUID getDocumentId() { return documentId; }
-    public void setDocumentId(UUID documentId) { this.documentId = documentId; }
-
-    public int getVersionNumber() { return versionNumber; }
-    public void setVersionNumber(int versionNumber) { this.versionNumber = versionNumber; }
-
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
-
-    public UUID getUpdatedBy() { return updatedBy; }
-    public void setUpdatedBy(UUID updatedBy) { this.updatedBy = updatedBy; }
-
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }

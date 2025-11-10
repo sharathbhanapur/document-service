@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Optional;
 import java.util.UUID;
 
+
 public class AuditorAwareImpl implements AuditorAware<UUID> {
 
     @Override
@@ -19,7 +20,8 @@ public class AuditorAwareImpl implements AuditorAware<UUID> {
 
         try {
             // assuming your authentication name is user UUID
-            return Optional.of(UUID.fromString(authentication.getName()));
+            return Optional.of(UUID.fromString("00000000-0000-0000-0000-000000000001"));
+            //Optional.of(UUID.fromString(authentication.getName()));
         } catch (IllegalArgumentException e) {
             // fallback if the username isn’t a UUID
             return Optional.empty();

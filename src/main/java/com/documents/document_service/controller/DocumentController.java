@@ -3,14 +3,10 @@ package com.documents.document_service.controller;
 
 import com.documents.document_service.entity.Document;
 import com.documents.document_service.service.impl.DocumentServiceImpl;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -27,26 +23,11 @@ public class DocumentController {
     public DocumentController(DocumentServiceImpl documentService) {
         this.documentService = documentService;
     }
-    @PostMapping
-    public ResponseEntity<Document> uploadDocument(@RequestBody Document document) {
-        Document saved = documentService.saveDocument(document);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
-    }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Document> getDocumentByName(@RequestBody String name) {
-        Document document = documentService.getDocumentByName(name);
+    @GetMapping("/{title}")
+    public ResponseEntity<Optional<Document>> getDocumentByTitle(@PathVariable String title) {
+        Optional<Document> document = documentService.getDocumentByTitle(title);
         return ResponseEntity.ok(document);
-    }
-
-    // 3️⃣ Get Documents by Uploader
-    @GetMapping
-    public ResponseEntity<List<Document>> getDocumentsByUploader(@RequestParam(required = false) String uploadedBy) {
-        if (uploadedBy != null) {
-            return ResponseEntity.ok(documentService.getDocumentsByUploader(uploadedBy));
-        }
-        // If no uploader param, return all documents
-        return ResponseEntity.ok(documentService.getAllDocuments());
     }
 
     // 4️⃣ Delete Document by ID
