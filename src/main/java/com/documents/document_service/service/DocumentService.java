@@ -6,6 +6,7 @@ import com.documents.document_service.entity.DocumentVersion;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.Pageable;
 
 public interface DocumentService {
 
@@ -17,7 +18,7 @@ public interface DocumentService {
 
     Optional<Document> getDocumentByTitle(String title);
 
-    List<Document> getAllDocuments();
+    List<Document> getAllDocuments(Pageable pageable);
 
     void deleteDocument(UUID id);
 

@@ -3,6 +3,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/document_db
     username: postgres
     password: admin
+    hikari:
+      maximum-pool-size: 20       # max concurrent connections
+      minimum-idle: 5             # minimum kept idle
+      idle-timeout: 30000         # 30 sec before idle conn closed
+      connection-timeout: 20000   # 20 sec wait before timeout
+      max-lifetime: 600000        # 10 min connection recycle
   jpa:
     hibernate:
         ddl-auto: update
