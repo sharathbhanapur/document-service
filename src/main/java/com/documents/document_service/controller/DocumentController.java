@@ -2,7 +2,7 @@ package com.documents.document_service.controller;
 
 
 import com.documents.document_service.entity.Document;
-import com.documents.document_service.service.impl.DocumentServiceImpl;
+import com.documents.document_service.service.DocumentService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +23,9 @@ public class DocumentController {
 
     private static final Logger logger = LoggerFactory.getLogger(DocumentController.class);
 
-    private final DocumentServiceImpl documentService;
+    private final DocumentService documentService;
 
-    public DocumentController(DocumentServiceImpl documentService) {
+    public DocumentController(DocumentService documentService) {
         this.documentService = documentService;
     }
 
